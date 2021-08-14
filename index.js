@@ -1,7 +1,11 @@
 const Joi = require('joi');
 const express = require('express'); 
+const mongoose = require('mongoose');
+require('dotenv/config');
+
+
 const app = express();
-app.use(express.json())
+app.use(express.json());
 
 const courses = [
     {id: 1, name: 'course 1'},
@@ -26,6 +30,10 @@ app.post('/api/courses', (req, res) => {
     course.name = req.body.name;
     courses.push(course);
     res.send(course);
+});
+
+mongoose.connect(process.env.DB_CONNECTION, { useUnifiedTopology: true }, (e)=>{
+    console.log('CONNECTED');
 })
 
 const port = process.env.PORT || 1010;
