@@ -2,10 +2,12 @@ const Joi = require('joi');
 const express = require('express'); 
 const mongoose = require('mongoose');
 require('dotenv/config');
-
-
 const app = express();
 app.use(express.json());
+
+// Routes
+const postRoutes = require('./routes/posts');
+app.use('/api/posts', postRoutes);
 
 const courses = [
     {id: 1, name: 'course 1'},
